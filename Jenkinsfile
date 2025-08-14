@@ -2,7 +2,7 @@ pipeline {
     agent {
         kubernetes {
             cloud 'demo-prod-k8s-us-east'
-            yamlFile k8s-agent.yaml
+            yamlFile 'k8s-agent.yaml'
             defaultContainer 'node-18'
         }
     }
