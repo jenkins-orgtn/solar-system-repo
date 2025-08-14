@@ -3,15 +3,19 @@ pipeline {
         kubernetes {
             cloud 'demo-prod-k8s-us-east'
             yaml """
-            apiVersion: v1
-            kind: Pod
-            spec:
-                containers:
-                - name: node-18
-                  image: node:18
-                  command:
-                  - cat
-                  tty: true
+apiVersion: v1
+kind: Pod
+spec:
+  tolerations:
+  - key: "node.kubernetes.io/disk-pressure"
+    operator: "Exists"
+    effect: "NoSchedule"
+  containers:
+  - name: node-18
+    image: node:18
+    command:
+    - cat
+    tty: true
             """
             defaultContainer 'node-18'
         }
