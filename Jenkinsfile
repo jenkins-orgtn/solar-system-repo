@@ -26,7 +26,7 @@ spec:
     }
 
     environment {
-        MONGO_URI = "mongoose.connect('mongodb+srv://supercluster.d83jj.mongodb.net/superData"
+        MONGO_URI = "mongodb+srv://supercluster.d83jj.mongodb.net/superData"
         MONGODB_DB_CREDS = credentials('mongo-db-credentials')
         MONGO_USERNAME = credentials('mongo-db-username')
         MONGO_PASS = credentials('mongo-db-password')
