@@ -6,6 +6,7 @@ pipeline {
             defaultContainer 'node-18'
         }
     }
+
     tools {
         nodejs 'nodejs-22-6-0'
     }
@@ -24,7 +25,7 @@ pipeline {
 
     stages {
         stage('Installing Dependencies') {
-            options { timestamps()}
+            options { timestamps() }
             steps {
                 sh 'node -v'
                 sh 'npm install --no-audit'
@@ -32,17 +33,15 @@ pipeline {
         }
 
         stage('Deps Scanning') {
-            parallel {
-                stage ('NPM dep audit') {
-                    steps {
-                        sh '''
-                            node -v'
-                            npm audit --audit-level=critical'
-                            echo $?
-                        '''
-                    }
-                }
+            steps {
+                sh '''
+                    node -v'
+                    npm audit --audit-level=critical'
+                    echo $?
+                '''
             }
+        }
+            
         stage('Unit testing') {
             parallel {
                 stage('Nodejs 18') {
@@ -67,6 +66,7 @@ pipeline {
                         docker {
                             image 'node:20-alpine'
                         }
+                    }
                     options { retry(2) }
                     steps {
                         sh 'sleep 10s'
