@@ -16,6 +16,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: node-19
+    image: node:19
+    command:
+    - cat
+    tty: true
             """
             defaultContainer 'node-18'
         }
