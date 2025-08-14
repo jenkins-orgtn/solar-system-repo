@@ -2,12 +2,13 @@ pipeline {
     agent {
         kubernetes {
             cloud 'demo-prod-k8s-us-east'
-            yaml-file k8s-agent.yaml
+            yamlFile k8s-agent.yaml
             defaultContainer 'node-18'
         }
-        tools {
-            nodejs 'nodejs-22-6-0'
-        }
+    }
+    tools {
+        nodejs 'nodejs-22-6-0'
+    }
 
         environment {
             MONGO_URI = "mongoose.connect('mongodb+srv://supercluster.d83jj.mongodb.net/superData"
