@@ -2,7 +2,17 @@ pipeline {
     agent {
         kubernetes {
             cloud 'demo-prod-k8s-us-east'
-            yamlFile 'k8s-agent.yaml'
+            yaml """
+            apiVersion: v1
+            kind: Pod
+            spec:
+                containers:
+                - name: node-18
+                  image: node:18
+                  command:
+                  - cat
+                  tty: true
+            """
             defaultContainer 'node-18'
         }
     }
@@ -35,8 +45,8 @@ pipeline {
         stage('Deps Scanning') {
             steps {
                 sh '''
-                    node -v'
-                    npm audit --audit-level=critical'
+                    node -v
+                    npm audit --audit-level=critical
                     echo $?
                 '''
             }
